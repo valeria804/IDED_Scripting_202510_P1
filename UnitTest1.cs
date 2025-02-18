@@ -18,12 +18,12 @@ namespace TestProject1
         private readonly Stack<uint> stack9 = new Stack<uint>(new uint[] { 37, 65, 62, 9, 76, 24, 69, 14, 90, 55, 50 });
         private readonly Stack<uint> stack10 = new Stack<uint>(new uint[] { 11, 38, 67, 12, 48, 95, 22, 68, 44, 81, 31, 99 });
 
-        private readonly Stack<uint> noFirstPrimeStack1 = new Stack<uint>(new uint[] { 34, 67, 89, 12, 45, 78, 56, 23, 90, 14, 38 });
-        private readonly Stack<uint> noFirstPrimeStack2 = new Stack<uint>(new uint[] { 19, 72, 84, 41, 95, 31, 50, 68, 21 });
-        private readonly Stack<uint> noFirstPrimeStack4 = new Stack<uint>(new uint[] { 22, 55, 88, 96, 11, 47, 71, 39, 66, 93, 31, 25 });
-        private readonly Stack<uint> noFirstPrimeStack6 = new Stack<uint>(new uint[] { 30, 20, 53, 44, 61, 32, 86, 75, 94, 59 });
+        private readonly Stack<uint> noFirstPrimeStack1 = new Stack<uint>(new uint[] { 2, 34, 67, 89, 12, 45, 78, 56, 90, 14, 38 });
+        private readonly Stack<uint> noFirstPrimeStack2 = new Stack<uint>(new uint[] { 3, 19, 72, 84, 41, 95, 50, 68, 21 });
+        private readonly Stack<uint> noFirstPrimeStack4 = new Stack<uint>(new uint[] { 7, 22, 55, 88, 96, 11, 47, 71, 39, 66, 93, 25 });
+        private readonly Stack<uint> noFirstPrimeStack6 = new Stack<uint>(new uint[] { 30, 20, 17, 53, 44, 61, 32, 86, 75, 94 });
         private readonly Stack<uint> noFirstPrimeStack9 = new Stack<uint>(new uint[] { 65, 62, 9, 76, 24, 69, 14, 90, 55, 50 });
-        private readonly Stack<uint> noFirstPrimeStack10 = new Stack<uint>(new uint[] { 38, 67, 12, 48, 95, 22, 68, 44, 81, 31, 99 });
+        private readonly Stack<uint> noFirstPrimeStack10 = new Stack<uint>(new uint[] { 11, 38, 67, 12, 48, 95, 22, 68, 44, 81, 99 });
 
         private Stack<uint>
             copyStack1, copyStack2, copyStack3,
@@ -124,24 +124,21 @@ namespace TestProject1
             copyStack10.ClearAll();
         }
 
-        /// <summary>
-        /// Tests TestMethods.QueueHasAnyPrime()
-        /// </summary>
         [Test]
-        public void TestStackHasAnyPrime()
+        public void TestStackFirstPrime()
         {
             SetupTestStacks();
 
-            Assert.IsTrue(TestMethods.StackHasAnyPrime(copyStack1));
-            Assert.IsTrue(TestMethods.StackHasAnyPrime(copyStack2));
-            Assert.IsFalse(TestMethods.StackHasAnyPrime(copyStack3));
-            Assert.IsTrue(TestMethods.StackHasAnyPrime(copyStack4));
-            Assert.IsFalse(TestMethods.StackHasAnyPrime(copyStack5));
-            Assert.IsTrue(TestMethods.StackHasAnyPrime(copyStack6));
-            Assert.IsFalse(TestMethods.StackHasAnyPrime(copyStack7));
-            Assert.IsFalse(TestMethods.StackHasAnyPrime(copyStack8));
-            Assert.IsTrue(TestMethods.StackHasAnyPrime(copyStack9));
-            Assert.IsTrue(TestMethods.StackHasAnyPrime(copyStack10));
+            Assert.AreEqual(23, TestMethods.StackFirstPrime(copyStack1));
+            Assert.AreEqual(31, TestMethods.StackFirstPrime(copyStack2));
+            Assert.AreEqual(0, TestMethods.StackFirstPrime(copyStack3));
+            Assert.AreEqual(31, TestMethods.StackFirstPrime(copyStack4));
+            Assert.AreEqual(0, TestMethods.StackFirstPrime(copyStack5));
+            Assert.AreEqual(59, TestMethods.StackFirstPrime(copyStack6));
+            Assert.AreEqual(0, TestMethods.StackFirstPrime(copyStack7));
+            Assert.AreEqual(0, TestMethods.StackFirstPrime(copyStack8));
+            Assert.AreEqual(37, TestMethods.StackFirstPrime(copyStack9));
+            Assert.AreEqual(31, TestMethods.StackFirstPrime(copyStack10));
         }
 
         [Test]
@@ -175,7 +172,7 @@ namespace TestProject1
             Assert.IsTrue(queue7.HasSameElementsAtIndeces(TestMethods.CreateQueueFromStack(copyStack7)));
             Assert.IsTrue(queue8.HasSameElementsAtIndeces(TestMethods.CreateQueueFromStack(copyStack8)));
             Assert.IsTrue(queue9.HasSameElementsAtIndeces(TestMethods.CreateQueueFromStack(copyStack9)));
-            Assert.IsTrue(queue1.HasSameElementsAtIndeces(TestMethods.CreateQueueFromStack(copyStack10)));
+            Assert.IsTrue(queue10.HasSameElementsAtIndeces(TestMethods.CreateQueueFromStack(copyStack10)));
         }
 
         [Test]
@@ -192,16 +189,20 @@ namespace TestProject1
             Assert.IsTrue(stack7.HasSameElementsAtIndeces(TestMethods.StackToList(copyStack7)));
             Assert.IsTrue(stack8.HasSameElementsAtIndeces(TestMethods.StackToList(copyStack8)));
             Assert.IsTrue(stack9.HasSameElementsAtIndeces(TestMethods.StackToList(copyStack9)));
-            Assert.IsTrue(stack1.HasSameElementsAtIndeces(TestMethods.StackToList(copyStack10)));
+            Assert.IsTrue(stack10.HasSameElementsAtIndeces(TestMethods.StackToList(copyStack10)));
         }
 
-        /// <summary>
-        /// Tests TestMethods.FoundElementAfterSorted
-        /// </summary>
         [Test]
         public void TestFoundElementAfterSorted()
         {
             SetupTestLists();
+
+            Assert.IsTrue(TestMethods.FoundElementAfterSorted(copyList1, -50));
+            Assert.IsFalse(TestMethods.FoundElementAfterSorted(copyList2, 42));
+            Assert.IsTrue(TestMethods.FoundElementAfterSorted(copyList3, 100));
+            Assert.IsTrue(TestMethods.FoundElementAfterSorted(copyList4, 55));
+            Assert.IsFalse(TestMethods.FoundElementAfterSorted(copyList5, 8));
+            Assert.IsFalse(TestMethods.FoundElementAfterSorted(copyList6, 28));
 
             Assert.IsTrue(sortedList1.HasSameElementsAtIndeces(copyList1));
             Assert.IsTrue(sortedList2.HasSameElementsAtIndeces(copyList2));
@@ -209,14 +210,6 @@ namespace TestProject1
             Assert.IsTrue(sortedList4.HasSameElementsAtIndeces(copyList4));
             Assert.IsTrue(sortedList5.HasSameElementsAtIndeces(copyList5));
             Assert.IsTrue(sortedList6.HasSameElementsAtIndeces(copyList6));
-
-            Assert.IsTrue(TestMethods.FoundElementAfterSorted(copyList1, -50));
-            Assert.IsTrue(TestMethods.FoundElementAfterSorted(copyList1, -50));
-            Assert.IsFalse(TestMethods.FoundElementAfterSorted(copyList2, 42));
-            Assert.IsTrue(TestMethods.FoundElementAfterSorted(copyList3, 100));
-            Assert.IsTrue(TestMethods.FoundElementAfterSorted(copyList4, 55));
-            Assert.IsFalse(TestMethods.FoundElementAfterSorted(copyList5, 8));
-            Assert.IsFalse(TestMethods.FoundElementAfterSorted(copyList6, 28));
         }
     }
 }

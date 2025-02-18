@@ -4,9 +4,9 @@ namespace TestProject1
 {
     internal class TestMethods
     {
-        internal static bool StackHasAnyPrime(Stack<uint> stack)
+        internal static uint StackFirstPrime(Stack<uint> stack)
         {
-            return false;
+            return 0;
         }
 
         internal static Stack<uint> RemoveFirstPrime(Stack<uint> stack)
